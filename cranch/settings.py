@@ -1,5 +1,8 @@
+import dj_database_url
 from pathlib import Path
+import dotenv
 
+dotenv.load_dotenv()
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 
@@ -89,7 +92,10 @@ USE_L10N = True
 USE_TZ = True
 
 
+STATIC_ROOT = BASE_DIR / 'staticfiles' 
+
 STATIC_URL = '/static/'
+STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
