@@ -76,6 +76,7 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
+AUTH_USER_MODEL = 'core.CustomUser'
 
 LANGUAGE_CODE = 'en-us'
 
