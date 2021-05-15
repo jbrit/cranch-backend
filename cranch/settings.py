@@ -21,7 +21,10 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+
+    # Project Apps
     'core.apps.CoreConfig',
+    'messaging.apps.MessagingConfig',
 
     'rest_framework',
     'drf_yasg',
