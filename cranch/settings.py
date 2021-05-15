@@ -58,6 +58,7 @@ TEMPLATES = [
 ]
 
 WSGI_APPLICATION = 'cranch.wsgi.application'
+ASGI_APPLICATION = 'cranch.asgi.application'
 
 
 DATABASES = {
