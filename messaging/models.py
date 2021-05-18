@@ -11,9 +11,4 @@ class DirectMessaging(models.Model):
     @classmethod
     def combination_exists(cls, members):
         return cls.objects.filter(members=members).exists()
-
-    def clean(self, *args, **kwargs):
-        if len(self.members) != 2:
-            raise ValidationError("Exactly two members must be present in a direct message")
-        if self.combination_exists(self.members):
-            raise ValidationError("This direct message already exists")
+        
