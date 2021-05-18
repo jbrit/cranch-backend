@@ -9,6 +9,9 @@ class DirectMessaging(models.Model):
     members = models.ManyToManyField(User)
 
     @classmethod
-    def combination_exists(cls, members):
-        return cls.objects.filter(members=members).exists()
-        
+    def is_valid_dm(cls, members):
+        # does not exist and contains two members
+        return not (cls.objects.filter(members=members).exists() or len(members) != 2)
+    
+    def __str__(self):
+        return " | ".join(list(map(lambda member: member.email, self.members.all())))
