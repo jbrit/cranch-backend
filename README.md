@@ -10,6 +10,12 @@ Clone the project and Install all the project requirements
 pip install -r requirements.txt
 ```
 
+Then migrate to the database
+
+```bash
+python manage.py migrate
+```
+
 ## Usage
 
 ```bash
@@ -17,9 +23,11 @@ python manage.py runserver
 ```
 
 ## Contributing
+
 Pull requests are welcome. For major changes, please open an issue first to discuss what you would like to change.
 
 Please make sure to update tests as appropriate.
 
 ## License
+
 [MIT](https://choosealicense.com/licenses/mit/)
