@@ -21,13 +21,11 @@ class UserDirectMessageView(APIView):
     
     def get_object(self, request, username):
         user = request.user
-        if not user.is_authenticated:
-            raise Http404
         other_user = self.get_user(username)
-        dm = DirectMessaging.objects.get_or_create(members=[user,other_user])
+        dm = DirectMessaging.objects.get_or_create(members=[user.id,other_user.id])
         return dm
 
     def get(self, request, username, format=None):
-        dm = self.get_object(username)
+        dm = self.get_object(request, username)
         serializer = DirectMessageSerializer(dm)
         return Response(serializer.data, status=status.HTTP_200_OK)

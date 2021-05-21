@@ -15,3 +15,7 @@ class DirectMessaging(models.Model):
     
     def __str__(self):
         return " | ".join(list(map(lambda member: member.email, self.members.all())))
+    
+    class Meta:
+        verbose_name = "DM"
+        verbose_name_plural = "DMs"
