@@ -6,6 +6,8 @@ from django.core.exceptions import ValidationError
 User = get_user_model()
 class DirectMessaging(models.Model):
     uuid = models.UUIDField(unique=True, default=uuid.uuid4, editable=False)
+    first_user = models.ForeignKey(User)
+    second_user = models.ForeignKey(User)
     members = models.ManyToManyField(User)
 
     @classmethod
