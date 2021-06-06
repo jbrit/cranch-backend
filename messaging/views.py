@@ -1,6 +1,7 @@
 from django.http import Http404
 
 from rest_framework import status
+from rest_framework import permissions
 from rest_framework.response import Response
 from rest_framework.views import APIView
 
@@ -12,6 +13,7 @@ from .serializers import DirectMessageSerializer
 User = get_user_model()
 
 class UserDirectMessageView(APIView):
+    permission_classes = [permissions.IsAuthenticated]
 
     def get_user(self, username):
         try:
@@ -22,7 +24,7 @@ class UserDirectMessageView(APIView):
     def get_object(self, request, username):
         user = request.user
         other_user = self.get_user(username)
-        dm = DirectMessaging.objects.get_or_create(members=[user.id,other_user.id])
+        dm = DirectMessaging.objects.get_dm([user,other_user])
         return dm
 
     def get(self, request, username, format=None):
