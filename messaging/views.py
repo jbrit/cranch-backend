@@ -1,4 +1,5 @@
 from django.http import Http404
+from drf_yasg.utils import swagger_auto_schema
 
 from rest_framework import status
 from rest_framework import permissions
@@ -27,6 +28,7 @@ class UserDirectMessageView(APIView):
         dm = DirectMessaging.objects.get_dm([user,other_user])
         return dm
 
+    @swagger_auto_schema(responses={200: DirectMessageSerializer()})
     def get(self, request, username, format=None):
         dm = self.get_object(request, username)
         serializer = DirectMessageSerializer(dm)
