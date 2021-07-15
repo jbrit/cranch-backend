@@ -1,3 +1,4 @@
+from core.call_state import BaseCallerState, CallStateChoices, choice_to_class
 from django.db import models
 from django.contrib.auth.models import AbstractBaseUser
 from django.contrib.auth.models import PermissionsMixin
@@ -40,7 +41,19 @@ class Profile(models.Model):
     email_confirmed = models.BooleanField(default=False)
     first_name = models.CharField("First Name", blank=True, max_length=20)
     last_name = models.CharField("Last Name", blank=True, max_length=20)
+    call_state = models.CharField(max_length=10, choices=CallStateChoices.choices, default=CallStateChoices.IDLE, editable=False)
+    other_caller = models.OneToOneField('self', on_delete=models.SET_NULL, null=True, editable=False)
     
+    def get_state(self) -> BaseCallerState:
+       state_object =  choice_to_class[self.call_state]()
+       state_object.profile = self
+       return state_object
+
+
+    def set_state(self, state):
+        self.call_state = state
+        self.save()
+
 
     def get_full_name(self):
         return f"{self.first_name.capitalize()} {self.last_name.capitalize()}"
